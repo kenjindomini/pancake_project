@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "rm -rf node_modules dist data/user data/company",
     "lint": "semistandard --verbose | snazzy",
-    "prepare": "npm install && mkdir -p dist/resources",
+    "prepare": "mkdir dist/resources",
     "populate-data": "node data/populate-db",
     "build:js": "webpack --optimize-minimize",
     "build:html": "cp src/index.html dist/index.html",
@@ -35,7 +35,8 @@
     "pouchdb": "4.0.3",
     "react": "0.13.3",
     "rest": "1.3.1",
-    "rx": "2.5.3"
+    "rx": "2.5.3",
+    "pouchdb-quick-search": "1.1.0"
   },
   "devDependencies": {
     "babel-core": "5.8.25",
