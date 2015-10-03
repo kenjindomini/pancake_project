@@ -8,11 +8,12 @@
 * start bumping the version according to URL changes
 
 ## Frontend Infrastructure
-* change the JSON Graph to providing sort capabilities
-* provide office information to falcor clients
+* change the JSON Graph to providing sort capabilities, DONE
+* provide office information to falcor clients, DONE
 * provide thoughts on contrasting Falcor with GraphQL and or Relay
 * suggest or implement improvements to the clarity of the JSON Graph data model
-* speak to or implement the ability to write new documents and update existing ones
+** _id should be equal to the user's UID
+* speak to or implement the ability to write new documents and update existing ones, WIP
 
 ## Seneca based micro service layer
 * add it since it isn't in yet
