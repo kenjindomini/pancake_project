@@ -14,7 +14,8 @@ let App = React.createClass({
     return {
       sortColumn: 'name',
       sortDirection: 'az',
-      sorted: []
+      sorted: [],
+      pocTest: ""
     };
   },
   componentDidMount () {
@@ -36,7 +37,7 @@ let App = React.createClass({
       falcorModel.get('users[0..'+numberOfUsers+']["name","email","is_enabled","company","office","uid"]').then((d) => {
         console.log(d);
         this.setState({
-          sorted: sortBy(d.json.users, this.state.sortColumn)
+          sorted: sortBy(d.json.users, this.state.sortColumn), pocTest: "Testing users.length"
         });
         console.log(d.json.users);
       });
@@ -48,7 +49,7 @@ let App = React.createClass({
      falcorModel.get('usersAscendingSort[0..15]["name","email","is_enabled","company","office","uid"]').then((data) => {
      console.log(data);
      this.setState({
-     sorted: toArry(data.json.usersAscendingSort)
+     sorted: toArry(data.json.usersAscendingSort), pocTest: "Testing usersAscendingSort"
      });
      });
      */
@@ -57,7 +58,7 @@ let App = React.createClass({
      console.log("loading sorted(Descending) user info.");
      falcorModel.get('usersDescendingSort[0..15]["name","email","is_enabled","company","office","uid"]').then((data) => {
      this.setState({
-     sorted: toArry(data.json.usersDescendingSort), sortDirection: 'za'
+     sorted: toArry(data.json.usersDescendingSort), sortDirection: 'za', pocTest: "Testing usersDescendingSort"
      });
      console.log(data);
      });
@@ -67,7 +68,7 @@ let App = React.createClass({
     console.log("loading office info.");
     falcorModel.get('offices["Maynard", "NYC"]["address"]').then((data) => {
       this.setState({
-        sorted: toArry(data.json.offices)
+        sorted: toArry(data.json.offices), pocTest: "Testing offices"
       });
       console.log(data.json.offices)
     });
@@ -93,7 +94,7 @@ let App = React.createClass({
         <div>
           <h1>Welcome to the Jungle</h1>
 
-          <p>Testing presort Descending.</p>
+          <p>{this.state.pocTest}</p>
 
           <p>There are { this.state.sorted.length } users in the system.</p>
           <Table
