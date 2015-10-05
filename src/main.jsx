@@ -73,6 +73,25 @@ let App = React.createClass({
       console.log(data.json.offices)
     });
     */
+    //*
+    //POC Test for usersByName.set, This one does not display anything except the console.
+    console.log("seting user info via usersByName.");
+    var setUsersByName = {
+      usersByName: {
+        "Delores Patterson": {
+          "is_enabled": true,
+          "name": "Delores Patterson",
+          "company": "ESSENSIA",
+          "email": "delorespatterson@essensia.com",
+          "phone": "(942) 591-2934",
+          "office": "Portland"
+        }
+      }
+    };
+    falcorModel.set(setUsersByName).then((data) => {
+      console.log(data.json.usersByName);
+    });
+  //*/
   },
   handleColumnToggle (newColumn) {
     let newDirection = (this.state.sortDirection === 'az' && this.state.sortColumn === newColumn) ? 'za' : 'az';
