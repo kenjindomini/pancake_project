@@ -26,7 +26,7 @@ let App = React.createClass({
     //     sorted: sortBy(res.entity, this.state.sortColumn)
     //   });
     // });
-    //*
+    /*
     //POC Test for users.length.
     console.log("getting total number of users.");
     falcorModel.get('users.length').then((data) => {
@@ -42,7 +42,7 @@ let App = React.createClass({
         console.log(d.json.users);
       });
     });
-     //*/
+     */
     /*
      //POC Test for usersAscendingSort.
      console.log("loading sorted (Ascending) user info.");
@@ -77,19 +77,21 @@ let App = React.createClass({
     //POC Test for usersByName.set, This one does not display anything except the console.
     console.log("seting user info via usersByName.");
     var setUsersByName = {
-      usersByName: {
-        "Delores Patterson": {
-          "is_enabled": true,
-          "name": "Delores Patterson",
-          "company": "ESSENSIA",
-          "email": "delorespatterson@essensia.com",
-          "phone": "(942) 591-2934",
-          "office": "Portland"
+      json: {
+        usersByName: {
+          "Delores Patterson": {
+            "is_enabled": true,
+            "name": "Delores Patterson",
+            "company": "ESSENSIA",
+            "email": "delorespatterson@essensia.com",
+            "phone": "(942) 591-2934",
+            "office": "Portland"
+          }
         }
       }
     };
     falcorModel.set(setUsersByName).then((data) => {
-      console.log(data.json.usersByName);
+      console.log(data);
     });
   //*/
   },
