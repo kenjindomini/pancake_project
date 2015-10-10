@@ -43,16 +43,16 @@ let App = React.createClass({
       });
     });
      */
-    /*
+    //*
      //POC Test for usersAscendingSort.
      console.log("loading sorted (Ascending) user info.");
-     falcorModel.get('usersAscendingSort[0..15]["name","email","is_enabled","company","office","uid"]').then((data) => {
+     falcorModel.get('usersAscendingSort[2..15]["name","email","is_enabled","company","office","uid"]').then((data) => {
      console.log(data);
      this.setState({
      sorted: toArry(data.json.usersAscendingSort), pocTest: "Testing usersAscendingSort"
      });
      });
-     */
+     //*/
     /*
     //POC Test for usersDescendingSort
      console.log("loading sorted(Descending) user info.");
@@ -73,7 +73,7 @@ let App = React.createClass({
       console.log(data.json.offices)
     });
     */
-    //*
+    /*
     //POC Test for usersByName.set, This one does not display anything except the console.
     console.log("seting user info via usersByName.");
     var setUsersByName = {
@@ -86,6 +86,14 @@ let App = React.createClass({
             "email": "delorespatterson@essensia.com",
             "phone": "(942) 591-2934",
             "office": "Portland"
+          },
+          "Aida Vega": {
+            "is_enabled": true,
+            "name": "Aida Vega",
+            "company": "DIGINETIC",
+            "email": "aidavega@diginetic.com",
+            "phone": "(875) 559-2174",
+            "office": "NYC"
           }
         }
       }
@@ -93,7 +101,7 @@ let App = React.createClass({
     falcorModel.set(setUsersByName).then((data) => {
       console.log(data);
     });
-  //*/
+  */
   },
   handleColumnToggle (newColumn) {
     let newDirection = (this.state.sortDirection === 'az' && this.state.sortColumn === newColumn) ? 'za' : 'az';
