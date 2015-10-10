@@ -16,7 +16,8 @@ let App = React.createClass({
       sortDirection: 'az',
       sorted: [],
       pocTest: "",
-      note: ""
+      note: "",
+      userCount: 0
     };
   },
   componentDidMount () {
@@ -92,13 +93,18 @@ let App = React.createClass({
                 name="OfficesByName"
                 value="Get Offices"
                 onClick={this.getOffices}/>
+            &nbsp;&nbsp;<input
+                type="button"
+                name="Total Users"
+                value="Get Total users"
+                onClick={this.getUserCount}/>
           </p>
 
           <p>{this.state.pocTest}</p>
 
           <p>{this.state.note}</p>
 
-          <p>There are { this.state.sorted.length } users in the system.</p>
+          <p>There are { this.state.userCount } users in the system.</p>
           <Table
               onColumnToggle={ this.handleColumnToggle }
               column={ this.state.sortColumn }
@@ -115,6 +121,9 @@ let App = React.createClass({
       this.setState({
         sorted: toArry(data.json.usersAscendingSort), pocTest: "Testing usersAscendingSort"
       });
+      this.setState({
+        userCount: this.state.sorted.length
+      });
     });
   },
   getUsersDescending() {
@@ -123,6 +132,9 @@ let App = React.createClass({
     falcorModel.get('usersDescendingSort[0..15]["name","email","is_enabled","company","office","uid"]').then((data) => {
       this.setState({
         sorted: toArry(data.json.usersDescendingSort), sortDirection: 'za', pocTest: "Testing usersDescendingSort"
+      });
+      this.setState({
+        userCount: this.state.sorted.length
       });
       console.log(data);
     });
@@ -134,7 +146,7 @@ let App = React.createClass({
       console.log(data);
       var numberOfUsers = data.json.users.length - 1;
       console.log("Loading unsorted user list.");
-      if (numberOfUsers == undefined) {
+      if (numberOfUsers === undefined) {
         numberOfUsers = 19;
       }
       falcorModel.get('users[0..' + numberOfUsers + ']["name","email","is_enabled","company","office","uid"]').then((d) => {
@@ -142,9 +154,23 @@ let App = React.createClass({
         this.setState({
           sorted: sortBy(d.json.users, this.state.sortColumn), pocTest: "Testing users.length"
         });
+        this.setState({
+          userCount: this.state.sorted.length
+        });
         console.log(d.json.users);
       });
     });
+  },
+  getUserCount() {
+    //POC test users.length
+    console.log("getting total number of users.");
+    falcorModel.get('users.length').then((data) => {
+      console.log(data);
+      var numberOfUsers = data.json.users.length;
+      this.setState({
+        userCount: numberOfUsers
+      });
+  });
   },
   getOffices() {
     //POC Test for offices. This one does not display due to the way the table is dynamically created.
