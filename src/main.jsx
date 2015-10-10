@@ -48,9 +48,9 @@ let App = React.createClass({
     };
     falcorModel.set(setUsersByName).then((data) => {
       console.log(data);
+      //POC Test for usersAscendingSort.
+      this.getUsersAscending();
     });
-    //POC Test for usersAscendingSort.
-    this.getUsersAscending();
   },
   handleColumnToggle (newColumn) {
     let newDirection = (this.state.sortDirection === 'az' && this.state.sortColumn === newColumn) ? 'za' : 'az';
