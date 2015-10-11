@@ -17,7 +17,10 @@ let App = React.createClass({
       sorted: [],
       pocTest: '',
       note: '',
-      userCount: 0
+      userCount: 0,
+      rowsPerPage: 30,
+      pageCount: 0,
+      currentPage: 1
     };
   },
   componentDidMount () {
@@ -49,7 +52,14 @@ let App = React.createClass({
     falcorModel.set(setUsersByName).then((data) => {
       console.log(data);
       // POC Test for usersAscendingSort.
-      this.getUsersAscending();
+      this.getUserCount().then(() => {
+        if (this.state.userCount >= this.state.rowsPerPage) {
+          this.getUsersAscending(0, this.state.rowsPerPage - 1);
+          this.state.pageCount = Math.ceil(this.state.userCount / this.state.rowsPerPage);
+        } else {
+          this.getUsersAscending(0, this.state.userCount);
+        }
+      });
     });
   },
   handleColumnToggle (newColumn) {
@@ -113,28 +123,22 @@ let App = React.createClass({
         </div>
     );
   },
-  getUsersAscending () {
+  getUsersAscending (from = 2, to = 15) {
     // POC test for usersAscendingSort
     console.log('loading sorted (Ascending) user info.');
-    falcorModel.get('usersAscendingSort[2..15]["name","email","is_enabled","company","office","uid"]').then((data) => {
+    falcorModel.get('usersAscendingSort[' + from + '..' + to + ']["name","email","is_enabled","company","office","uid"]').then((data) => {
       console.log(data);
       this.setState({
         sorted: toArry(data.json.usersAscendingSort), pocTest: 'Testing usersAscendingSort'
       });
-      this.setState({
-        userCount: this.state.sorted.length
-      });
     });
   },
-  getUsersDescending () {
+  getUsersDescending (from = 0, to = 15) {
     // POC test for usersDescendingSort
     console.log('loading sorted(Descending) user info.');
-    falcorModel.get('usersDescendingSort[0..15]["name","email","is_enabled","company","office","uid"]').then((data) => {
+    falcorModel.get('usersDescendingSort[' + from + '..' + to + ']["name","email","is_enabled","company","office","uid"]').then((data) => {
       this.setState({
         sorted: toArry(data.json.usersDescendingSort), sortDirection: 'za', pocTest: 'Testing usersDescendingSort'
-      });
-      this.setState({
-        userCount: this.state.sorted.length
       });
       console.log(data);
     });
@@ -154,23 +158,21 @@ let App = React.createClass({
         this.setState({
           sorted: sortBy(d.json.users, this.state.sortColumn), pocTest: 'Testing users.length'
         });
-        this.setState({
-          userCount: this.state.sorted.length
-        });
         console.log(d.json.users);
       });
     });
   },
   getUserCount () {
-    // POC test users.length
-    console.log('getting total number of users.');
-    falcorModel.get('users.length').then((data) => {
-      console.log(data);
-      var numberOfUsers = data.json.users.length;
-      this.setState({
-        userCount: numberOfUsers
+    var p = new Promise((resolve) => {
+      // POC test users.length
+      console.log('getting total number of users.');
+      falcorModel.get('users.length').then((data) => {
+        console.log(data);
+        this.state.userCount = data.json.users.length;
+        resolve();
       });
     });
+    return p;
   },
   getOffices () {
     // POC Test for offices. This one does not display due to the way the table is dynamically created.
