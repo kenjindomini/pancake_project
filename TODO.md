@@ -1,7 +1,7 @@
 # Candidate Problems
 ## Frontend UX
 * add table filtering aka searching
-* add table paging
+* add table paging, WIP
 * move the paging or filtering concerns into the falcor layer w/ good UX on it
 * improve css and html build to be on par with the js build
 * get in the react router in a sensible manner
@@ -10,7 +10,7 @@
 ## Frontend Infrastructure
 * change the JSON Graph to providing sort capabilities, DONE
 * provide office information to falcor clients, DONE
-* provide thoughts on contrasting Falcor with GraphQL and or Relay
+* provide thoughts on contrasting Falcor with GraphQL and or Relay, DONE
 * suggest or implement improvements to the clarity of the JSON Graph data model
     * _id should be equal to the user's UID
 * speak to or implement the ability to write new documents and update existing ones, WIP
