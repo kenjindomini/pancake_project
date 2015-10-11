@@ -114,14 +114,54 @@ let App = React.createClass({
 
           <p>{this.state.note}</p>
 
-          <p>There are { this.state.userCount } users in the system.</p>
+          <p>Showing users { this.getCurrentUserRange() } of { this.state.userCount } users in the system.</p>
           <Table
               onColumnToggle={ this.handleColumnToggle }
               column={ this.state.sortColumn }
               direction={ this.state.sortDirection }
               rows={ this.state.sorted }/>
+          <a class='right' name='previous' onClick={this.getSortedUsers}>Previous</a>
+          &nbsp;&nbsp;
+          <a class='right' name='next' onClick={this.getSortedUsers}>Next</a>
         </div>
     );
+  },
+  getCurrentUserRange () {
+    var first = (this.state.rowsPerPage * this.state.currentPage) - (this.state.rowsPerPage - 1);
+    var last = this.state.rowsPerPage * this.state.currentPage;
+    var rangeString = first + '-' + last;
+    return rangeString;
+  },
+  getSortedUsers () {
+    var target = event.target;
+    switch (target.name) {
+      case 'next':
+      {
+        this.state.currentPage += 1;
+        break;
+      }
+      case 'previous':
+      {
+        this.state.currentPage -= 1;
+        break;
+      }
+      default:
+      {
+        this.state.currentPage = target.name;
+        break;
+      }
+    }
+    if (this.state.currentPage < 1 || this.state.currentPage > this.state.pageCount) {
+      this.state.currentPage = 1;
+    }
+    var from = (this.state.rowsPerPage * this.state.currentPage) - this.state.rowsPerPage;
+    var to = this.state.rowsPerPage * this.state.currentPage;
+    to = to <= this.state.userCount ? to : this.state.userCount;
+    if (this.state.sortDirection === 'az') {
+      this.getUsersAscending(from, to);
+    } else {
+      this.getUsersDescending(from, to);
+    }
   },
   getUsersAscending (from = 2, to = 15) {
     // POC test for usersAscendingSort
