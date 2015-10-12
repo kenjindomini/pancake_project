@@ -5,5 +5,3 @@ echo "Running npm install"
 npm install
 echo "Running npm run build-dev"
 npm run build-dev
-echo "Running npm run start"
-npm run start
