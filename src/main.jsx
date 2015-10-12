@@ -103,11 +103,6 @@ let App = React.createClass({
                 name='OfficesByName'
                 value='Get Offices'
                 onClick={this.getOffices}/>
-            &nbsp;&nbsp;<input
-                type='button'
-                name='Total Users'
-                value='Get Total users'
-                onClick={this.getUserCount}/>
           </p>
 
           <p>{this.state.pocTest}</p>
@@ -156,7 +151,9 @@ let App = React.createClass({
     }
     var from = (this.state.rowsPerPage * this.state.currentPage) - this.state.rowsPerPage;
     var to = this.state.rowsPerPage * this.state.currentPage;
-    to = to <= this.state.userCount ? to : this.state.userCount;
+    this.getUserCount().then((userCount) => {
+      to = to <= userCount ? to : userCount;
+    });
     if (this.state.sortDirection === 'az') {
       this.getUsersAscending(from, to);
     } else {
@@ -184,14 +181,12 @@ let App = React.createClass({
     });
   },
   getUsers () {
-    // POC test for unsorted users call and users.length.
+    // Get all users (unsorted).
     console.log('getting total number of users.');
-    falcorModel.get('users.length').then((data) => {
-      console.log(data);
-      var numberOfUsers = data.json.users.length - 1;
+    this.getUserCount().then((userCount) => {
       console.log('Loading unsorted user list.');
-      if (numberOfUsers === undefined) {
-        numberOfUsers = 19;
+      if (userCount === undefined) {
+        userCount = 0;
       }
       falcorModel.get('users[0..' + numberOfUsers + ']["name","email","is_enabled","company","office","uid"]').then((d) => {
         console.log(d);
@@ -204,12 +199,11 @@ let App = React.createClass({
   },
   getUserCount () {
     var p = new Promise((resolve) => {
-      // POC test users.length
+      // Get users.length
       console.log('getting total number of users.');
       falcorModel.get('users.length').then((data) => {
         console.log(data);
-        this.state.userCount = data.json.users.length;
-        resolve();
+        resolve(data.json.users.length);
       });
     });
     return p;
