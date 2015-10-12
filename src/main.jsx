@@ -121,10 +121,18 @@ let App = React.createClass({
               direction={ this.state.sortDirection }
               rows={ this.state.sorted }/>
           <a class='right' name='previous' onClick={this.getSortedUsers}>Previous</a>
+          { this.generatePageLinks() }
           &nbsp;&nbsp;
           <a class='right' name='next' onClick={this.getSortedUsers}>Next</a>
         </div>
     );
+  },
+  generatePageLinks () {
+    var links = [];
+    var lastPage = math.ceil(this.state.userCount / this.state.rowsPerPage);
+    for (var i = 1; i <= lastPage; i++) {
+      links.push(<a class='right' name={i} onClick={this.getSortedUsers}>{i}</a>,'&nbsp;&nbsp;');
+    }
   },
   getCurrentUserRange () {
     var first = (this.state.rowsPerPage * this.state.currentPage) - (this.state.rowsPerPage - 1);
