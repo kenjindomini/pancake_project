@@ -17,9 +17,8 @@ let App = React.createClass({
       sorted: [],
       pocTest: '',
       note: '',
-      userCount: 0,
       rowsPerPage: 30,
-      pageCount: 0,
+      pageCount: 1,
       currentPage: 1
     };
   },
@@ -124,7 +123,10 @@ let App = React.createClass({
   },
   generatePageLinks () {
     var links = [];
-    var lastPage = math.ceil(this.state.userCount / this.state.rowsPerPage);
+    var lastPage;
+    this.getUserCount().then((userCount) => {
+      lastPage = math.ceil(userCount / this.state.rowsPerPage);
+    });
     for (var i = 1; i <= lastPage; i++) {
       links.push(<a class='right' name={i} onClick={this.getSortedUsers}>{i}</a>,'&nbsp;&nbsp;');
     }
@@ -196,7 +198,7 @@ let App = React.createClass({
       if (userCount === undefined) {
         userCount = 0;
       }
-      falcorModel.get('users[0..' + numberOfUsers + ']["name","email","is_enabled","company","office","uid"]').then((d) => {
+      falcorModel.get('users[0..' + userCount + ']["name","email","is_enabled","company","office","uid"]').then((d) => {
         console.log(d);
         this.setState({
           sorted: sortBy(d.json.users, this.state.sortColumn), pocTest: 'Testing users.length'
