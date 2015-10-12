@@ -1,3 +1,6 @@
+/*global
+ math,event
+ */
 import React from 'react';
 
 import {
@@ -114,10 +117,10 @@ let App = React.createClass({
               column={ this.state.sortColumn }
               direction={ this.state.sortDirection }
               rows={ this.state.sorted }/>
-          <a class='right' name='previous' onClick={this.getSortedUsers}>Previous</a>
+          <a className='right' name='previous' onClick={this.getSortedUsers}>Previous</a>
           { this.generatePageLinks() }
           &nbsp;&nbsp;
-          <a class='right' name='next' onClick={this.getSortedUsers}>Next</a>
+          <a className='right' name='next' onClick={this.getSortedUsers}>Next</a>
         </div>
     );
   },
@@ -128,7 +131,7 @@ let App = React.createClass({
       lastPage = math.ceil(userCount / this.state.rowsPerPage);
     });
     for (var i = 1; i <= lastPage; i++) {
-      links.push(<a class='right' name={i} onClick={this.getSortedUsers}>{i}</a>,'&nbsp;&nbsp;');
+      links.push(<a className='right' name={i} onClick={this.getSortedUsers}>{i}</a>, '&nbsp;&nbsp;');
     }
   },
   getCurrentUserRange () {
@@ -141,20 +144,20 @@ let App = React.createClass({
     var target = event.target;
     switch (target.name) {
       case 'next':
-      {
-        this.state.currentPage += 1;
-        break;
-      }
+        {
+          this.state.currentPage += 1;
+          break;
+        }
       case 'previous':
-      {
-        this.state.currentPage -= 1;
-        break;
-      }
+        {
+          this.state.currentPage -= 1;
+          break;
+        }
       default:
-      {
-        this.state.currentPage = target.name;
-        break;
-      }
+        {
+          this.state.currentPage = target.name;
+          break;
+        }
     }
     if (this.state.currentPage < 1 || this.state.currentPage > this.state.pageCount) {
       this.state.currentPage = 1;
