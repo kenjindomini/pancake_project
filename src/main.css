@@ -22,12 +22,15 @@ body {
   border-left: solid 1px #ccc;
   padding: 3px 10px 2px;
 }
-a.right {
+.right {
   text-align: right;
+  float: right;
   color: #0040D0;
 }
 a:hover {
   text-decoration: underline overline;
+  cursor: pointer;
+  cursor: hand;
 }
 .header .cell {
   -webkit-touch-callout: none;
