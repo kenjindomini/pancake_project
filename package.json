@@ -2,16 +2,16 @@
   "name": "pancake_project",
   "description": "Pancake project using React, Falcor and Seneca",
   "version": "1.0.0",
-  "author": "Erik Solen",
+  "author": "Erik Solen & Keith Olenchak",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:solenoid/pancake_project.git"
+    "url": "https://github.com/kenjindomini/pancake_project.git"
   },
   "scripts": {
     "clean": "rm -rf node_modules dist data/user data/company",
     "lint": "semistandard --verbose | snazzy",
-    "prepare": "mkdir dist/resources",
+    "prepare": "mkdir dist && mkdir dist/resources",
     "populate-data": "node data/populate-db",
     "build:js": "webpack --optimize-minimize",
     "build:html": "cp src/index.html dist/index.html",
