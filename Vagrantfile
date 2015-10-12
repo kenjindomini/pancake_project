@@ -10,7 +10,6 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 4000, host: 4000
 
   config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     vb.memory = 2048
     vb.name = "Pancake_Project"
   end
