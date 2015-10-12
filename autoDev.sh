@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
-nvm install 4.1.1
 git clone https://github.com/kenjindomini/pancake_project.git ~/pancake_project
 cd ~/pancake_project
+echo "Running npm install"
 npm install
+echo "Running npm run build-dev"
 npm run build-dev
+echo "Running npm run start"
 npm run start
