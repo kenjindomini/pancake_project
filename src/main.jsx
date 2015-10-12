@@ -1,5 +1,5 @@
 /*global
- math,event
+ event
  */
 import React from 'react';
 
@@ -20,6 +20,7 @@ let App = React.createClass({
       sorted: [],
       pocTest: '',
       note: '',
+      userCount: 0,
       rowsPerPage: 30,
       pageCount: 1,
       currentPage: 1
@@ -80,6 +81,10 @@ let App = React.createClass({
     });
   },
   render () {
+    var userCount = 0;
+    this.getUserCount().then((result) => {
+      userCount = result;
+    });
     return (
         <div>
           <h1>Welcome to the Jungle</h1>
@@ -117,22 +122,24 @@ let App = React.createClass({
               column={ this.state.sortColumn }
               direction={ this.state.sortDirection }
               rows={ this.state.sorted }/>
-          <a className='right' name='previous' onClick={this.getSortedUsers}>Previous</a>
-          { this.generatePageLinks() }
-          &nbsp;&nbsp;
-          <a className='right' name='next' onClick={this.getSortedUsers}>Next</a>
+          <div className='right'>
+            <a name='previous' onClick={this.getSortedUsers}>Previous</a>
+            ..
+            { this.generatePageLinks() }
+
+            <a name='next' onClick={this.getSortedUsers}>Next</a>
+          </div>
         </div>
     );
   },
   generatePageLinks () {
     var links = [];
     var lastPage;
-    this.getUserCount().then((userCount) => {
-      lastPage = math.ceil(userCount / this.state.rowsPerPage);
-    });
+    lastPage = Math.ceil(this.state.userCount / this.state.rowsPerPage);
     for (var i = 1; i <= lastPage; i++) {
-      links.push(<a className='right' name={i} onClick={this.getSortedUsers}>{i}</a>, '&nbsp;&nbsp;');
+      links.push(<a name={i} onClick={this.getSortedUsers}>{i}</a>, '..');
     }
+    return links;
   },
   getCurrentUserRange () {
     var first = (this.state.rowsPerPage * this.state.currentPage) - (this.state.rowsPerPage - 1);
@@ -216,6 +223,7 @@ let App = React.createClass({
       console.log('getting total number of users.');
       falcorModel.get('users.length').then((data) => {
         console.log(data);
+        this.state.userCount = data.json.users.length;
         resolve(data.json.users.length);
       });
     });
