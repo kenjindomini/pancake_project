@@ -144,6 +144,9 @@ let App = React.createClass({
     return rangeString;
   },
   getSortedUsers () {
+    // Debug logging
+    console.log('getSortedUsers: this.state at begining:');
+    console.log(this.state);
     var target = event.target;
     if (target) {
       switch (target.name) {
@@ -172,6 +175,10 @@ let App = React.createClass({
     this.getUserCount().then((userCount) => {
       to = to <= userCount ? to : userCount;
     });
+    // Debug logging
+    console.log('getSortedUsers: from:' + from + ' to:' + to);
+    console.log('getSortedUsers: this.state after changes:');
+    console.log(this.state);
     /*
     // Testing call(sortedUsers)
     var sortDirection;
@@ -211,10 +218,16 @@ let App = React.createClass({
       to = 30;
       this.state.rowsPerPage = 30;
     }
-    // POC test for usersAscendingSort
+    // Debug logging
+    console.log('getUsersAscending: from:' + from + ' to:' + to);
+    // End
+    // Falcor call to usersAscendingSort
     console.log('loading sorted (Ascending) user info.');
     falcorModel.get(['usersAscendingSort', {from: from, to: to}, ['name', 'email', 'is_enabled', 'company', 'office', 'uid']]).then((data) => {
+      // Debug Logging
+      console.log('getUsersDescending: data returned from falcor: ');
       console.log(data);
+      // End
       this.setState({
         sorted: toArry(data.json.usersAscendingSort), pocTest: 'Testing usersAscendingSort'
       });
@@ -226,13 +239,19 @@ let App = React.createClass({
       to = 30;
       this.state.rowsPerPage = 30;
     }
-    // POC test for usersDescendingSort
+    //Debug logging
+    console.log('getUsersAscending: from:' + from + ' to:' + to);
+    // End
+    // Falcor call to usersDescendingSort
     console.log('loading sorted(Descending) user info.');
     falcorModel.get(['usersDescendingSort', {from: from, to: to}, ['name', 'email', 'is_enabled', 'company', 'office', 'uid']]).then((data) => {
       this.setState({
         sorted: toArry(data.json.usersDescendingSort), sortDirection: 'za', pocTest: 'Testing usersDescendingSort'
       });
+      // Debug Logging
+      console.log('getUsersDescending: data returned from falcor: ');
       console.log(data);
+      // End
     });
   },
   getUsers () {
