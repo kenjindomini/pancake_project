@@ -56,9 +56,6 @@ work with to show some of your work changing around this codebase.
 * Adding a set route "usersByName" that will allow the client side to update records and could easily be expanded to add new records.
     * This is currently about 90% complete with calls coming in but each user only has 1 key value pair and assuming this wasn't a problem the update DB code is not updating the DB
     * If we could get call routes working this might be a prime candidate for converting to a function.
-* ~~Pagination breaks when using the POC buttons.~~  Fixed: See 'Bug_fixes' branch
-    * ~~clicking on a page number then clicking next doesn't seem to behave as expected.~~
-    * ~~there is a maths bug between the client layer and API layer~~
 
 ### Future
 * Make office names clickable and have the test in that cell replaced by the office address.
