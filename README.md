@@ -33,6 +33,7 @@ work with to show some of your work changing around this codebase.
     ```
     only the user's company comes through and if you remove the company only their email comes through, etc.
     * Currently bulkDocs is not updating the database even when a new value is coming through, correcting the code to update the database has been put on the backburner since all expected data is not even getting to the route.
+
 #### Frontend
 * Added buttons to test functionality of 4 routes get(users), get(usersAscendingSort), get(usersDescendingSort), get(offices)
     * get(offices) currently just outputs the stringified JSON as a method has not yet been added to display the data in a meaningful way
@@ -41,18 +42,50 @@ work with to show some of your work changing around this codebase.
 * All calls were broken out in to individual functions so that the site would not need to be recompiled in order to test each API call.
 * Added a single call to handle getting sorted users, it determines if we are ascending or descending and calls the correct function.
 
-### Requirements
-node and npm minimally, but figure out precisely how best to say this.
-This is in the process of being reduced to vagrant and virtualbox.
+### WIP
+* Adding a call route "sortedUsers" that will allow granular control over which column the client wants the data presorted by.
+    * This is currently in a state of built but regardless of the setup we either get back an HTTP 500 or an empty jsonGraph.
+* Adding a set route "usersByName" that will allow the client side to update records and could easily be expanded to add new records.
+    * This is currently about 90% complete with calls coming in but each user only has 1 key value pair and assuming this wasn't a problem the update DB code is not updating the DB
+    * If we could get call routes working this might be a prime candidate for converting to a function.
+* Building a working vagrantfile that will still allow the site to be reached from the host machine.
+* Testing version of node prior to 4.1.1 via NVM.
 
 ### Setup
+#### Vagrant(automated)
+##### Requirements
+* Vagrant
+* Virtualbox
+* git
+* 2 cpu (cores) and 2GBs of RAM to dedicate to the vagrant VM.
+
 ```
-npm install       # get dev and app dependencies
-npm run build-dev # first time setup for local development
-npm start         # run webpack dev server and thin backend server
-This is in the process of being reduced to:
-vagrant up
+git clone https://github.com/kenjindomini/pancake_project.git ~/pancake_project     # If on windows be sure to use powershell which supports some *nix conventions like ~ and ls
+cd ~\pancake_project                                                                # Verify you see project files like README.md if not you will likely see a directory named pancake_project cd in to that as well
+vagrant up                                                                          # This will take a few minutes, grab your beverage of choice and/or have a promenade around the lake.
+vagrant ssh                                                                         # On windows be sure the full path to Git\usr\bin is in PATH as this will contain ssh.
+cd pancake_project                                                                  # Verify you see project files like README.md if not you will likely see a directory named pancake_project cd in to that as well
+npm run start
 ```
+
+#### Local
+##### Requirements
+* Node + npm
+* Python 2.7.2
+* git
+
+```
+git clone https://github.com/kenjindomini/pancake_project.git ~/pancake_project     # If on windows be sure to use powershell which supports some *nix conventions like ~ and ls
+cd ~\pancake_project                                                                # Verify you see project files like README.md if not you will likely see a directory named pancake_project cd in to that as well
+npm install                                                                         # get dev and app dependencies
+npm run build-dev                                                                   # first time setup for local development (Will not work on windows due to joining commands via &&.)
+npm run start                                                                       # run webpack dev server and thin backend server
+```
+
+### Testing
+Completed features were confirmed working on the following versions of node:
+* 4.1.1
+
 
 ### ES6 Cheatsheet
 In case the newer syntax is throwing you for a loop.
