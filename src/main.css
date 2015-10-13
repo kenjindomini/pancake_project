@@ -3,6 +3,7 @@ body {
   padding: 10px;
   font-family: Arial;
   color: #666;
+  background-color: antiquewhite;
 }
 
 /* fixedTable.jsx stuff */
@@ -12,6 +13,12 @@ body {
   font-size: 16px;
   line-height: 19px;
   margin-bottom: 10px;
+}
+tr:nth-child(even) {
+  background-color: #aaaaaa;
+}
+tr:nth-child(odd) {
+  background-color: antiquewhite;
 }
 .row {
   border-top: solid 1px #ccc;
@@ -56,6 +63,7 @@ a:hover {
 .header .cell:hover {
   color: #000;
   cursor: pointer;
+  cursor: hand;
   text-decoration: underline;
 }
 
