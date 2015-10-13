@@ -241,7 +241,7 @@ let App = React.createClass({
       this.state.rowsPerPage = 30;
       this.state.currentPage = 1;
     }
-    //Debug logging
+    // Debug logging
     console.log('getUsersAscending: from:' + from + ' to:' + to);
     // End
     // Falcor call to usersDescendingSort
