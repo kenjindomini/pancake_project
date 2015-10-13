@@ -50,6 +50,8 @@ work with to show some of your work changing around this codebase.
     * If we could get call routes working this might be a prime candidate for converting to a function.
 * Building a working vagrantfile that will still allow the site to be reached from the host machine.
 * Testing version of node prior to 4.1.1 via NVM.
+* Pagination breaks when using the POC buttons.
+    * clicking on a page number then clicking next doesn't seem to behave as expected.
 
 ### Setup
 #### Vagrant(automated)
@@ -89,7 +91,13 @@ Note: if your server supports apt-get you could download the two shell scripts f
 
 ### Testing
 Completed features were confirmed working on the following versions of node:
+* 4.2.0
+* 4.1.2
 * 4.1.1
+* 4.0.0
+* Application breaks on version below 4.0.0 (updated package.json)
+
+Note: Did not test any version labled iojs.
 
 
 ### ES6 Cheatsheet
