@@ -162,7 +162,7 @@ let App = React.createClass({
           }
         default:
           {
-            this.state.currentPage = target.name;
+            this.state.currentPage = parseInt(target.name, 10);
             break;
           }
       }
@@ -217,6 +217,7 @@ let App = React.createClass({
       from = 0;
       to = 30;
       this.state.rowsPerPage = 30;
+      this.state.currentPage = 1;
     }
     // Debug logging
     console.log('getUsersAscending: from:' + from + ' to:' + to);
@@ -238,6 +239,7 @@ let App = React.createClass({
       from = 0;
       to = 30;
       this.state.rowsPerPage = 30;
+      this.state.currentPage = 1;
     }
     //Debug logging
     console.log('getUsersAscending: from:' + from + ' to:' + to);
@@ -265,7 +267,7 @@ let App = React.createClass({
       falcorModel.get('users[0..' + userCount + ']["name","email","is_enabled","company","office","uid"]').then((d) => {
         console.log(d);
         this.setState({
-          sorted: sortBy(d.json.users, this.state.sortColumn), pocTest: 'Testing users.length', rowsPerPage: 300
+          sorted: sortBy(d.json.users, this.state.sortColumn), pocTest: 'Testing users.length', rowsPerPage: 300, currentPage: 1
         });
         console.log(d.json.users);
       });
