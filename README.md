@@ -5,6 +5,7 @@ work with to show some of your work changing around this codebase.
 [![js-semistandard-style](https://img.shields.io/badge/code%20style-semistandard-brightgreen.svg?style=flat-square)](https://github.com/solenoid/pancake_project)
 
 ### Implementation
+#### Infrastructure
 * Modified users route to limit DB query to to just the requested range, rather than wasting cycles retrieving the whole database and filtering down.
 * Added two routes to retrieve users in a range pre-sorted by name; usersAscendingSort and usersDescendingSort.
     * It may be possible to reduce creating 2 routes for each column you might want to sort by using a call route instead of get. (Researching)
@@ -32,6 +33,13 @@ work with to show some of your work changing around this codebase.
     ```
     only the user's company comes through and if you remove the company only their email comes through, etc.
     * Currently bulkDocs is not updating the database even when a new value is coming through, correcting the code to update the database has been put on the backburner since all expected data is not even getting to the route.
+#### Frontend
+* Added buttons to test functionality of 4 routes get(users), get(usersAscendingSort), get(usersDescendingSort), get(offices)
+    * get(offices) currently just outputs the stringified JSON as a method has not yet been added to display the data in a meaningful way
+* Added pagination support.
+    * Currently restricted to ascending or descending sort of the name column while a sustainable solution is being researched for the API layer.
+* All calls were broken out in to individual functions so that the site would not need to be recompiled in order to test each API call.
+* Added a single call to handle getting sorted users, it determines if we are ascending or descending and calls the correct function.
 
 ### Requirements
 node and npm minimally, but figure out precisely how best to say this.
