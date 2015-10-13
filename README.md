@@ -41,6 +41,12 @@ work with to show some of your work changing around this codebase.
     * Currently restricted to ascending or descending sort of the name column while a sustainable solution is being researched for the API layer.
 * All calls were broken out in to individual functions so that the site would not need to be recompiled in order to test each API call.
 * Added a single call to handle getting sorted users, it determines if we are ascending or descending and calls the correct function.
+* Added CSS to force the links to behave like links
+    * Set color to blue
+    * Set cursor to pointer or hand (to cover all browsers) added cursor: hand to .header .cell:hover as well.
+    * Set text decoration to overline underline to make it stand out.
+* Put pagination links in a div and floated it right.
+* Modified CSS to alternate background color of table rows.
 
 ### WIP
 * Adding a call route "sortedUsers" that will allow granular control over which column the client wants the data presorted by.
@@ -48,10 +54,19 @@ work with to show some of your work changing around this codebase.
 * Adding a set route "usersByName" that will allow the client side to update records and could easily be expanded to add new records.
     * This is currently about 90% complete with calls coming in but each user only has 1 key value pair and assuming this wasn't a problem the update DB code is not updating the DB
     * If we could get call routes working this might be a prime candidate for converting to a function.
-* Building a working vagrantfile that will still allow the site to be reached from the host machine.
-* Testing version of node prior to 4.1.1 via NVM.
 * Pagination breaks when using the POC buttons.
     * clicking on a page number then clicking next doesn't seem to behave as expected.
+    * there is a maths bug between the client layer and API layer
+
+### Future
+* Make office names clickable and have the test in that cell replaced by the office address.
+    * Clicking on the address should either link to google maps or a link should be included, in parenthesis, as part of the text replacement.
+* Add a dropdown to set number of rows per page.
+
+* Better understand webpack then see if it can be optimized
+    * Example: currently the hot server does not sync CSS.
+* Fix table to not extend full width if it isnt needed.
+    * Wrap it and pagination in a div so the pagination links never extended beyond the right boarder of the table.
 
 ### Setup
 #### Vagrant(automated)
@@ -96,6 +111,8 @@ Completed features were confirmed working on the following versions of node:
 * 4.1.1
 * 4.0.0
 * Application breaks on version below 4.0.0 (updated package.json)
+* 0.12.7 (failed)
+* 0.10.40 (failed)
 
 Note: Did not test any version labled iojs.
 
