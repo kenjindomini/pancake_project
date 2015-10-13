@@ -12,6 +12,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 2048
     vb.name = "Pancake_Project"
+    vb.cpus = 2
   end
 
   config.vm.provision "shell", path: "prereqs.sh", privileged: false
