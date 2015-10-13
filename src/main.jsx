@@ -133,7 +133,7 @@ let App = React.createClass({
     var lastPage;
     lastPage = Math.ceil(this.state.userCount / this.state.rowsPerPage);
     for (var i = 1; i <= lastPage; i++) {
-      links.push(<a name={i} onClick={this.getSortedUsers}>{i}</a>, '..');
+      links.push(<a name={i} key={i} onClick={this.getSortedUsers}>{i}</a>, '..');
     }
     return links;
   },
