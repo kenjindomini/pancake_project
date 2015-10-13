@@ -33,6 +33,8 @@ work with to show some of your work changing around this codebase.
     ```
     only the user's company comes through and if you remove the company only their email comes through, etc.
     * Currently bulkDocs is not updating the database even when a new value is coming through, correcting the code to update the database has been put on the backburner since all expected data is not even getting to the route.
+* Fixed a bug that was causing getSortedUsers to return more results than requested.
+* Fixed a bug when using a page number link next or previous would both start over from page 1 because the currentPage was being stored as a string.
 
 #### Frontend
 * Added buttons to test functionality of 4 routes get(users), get(usersAscendingSort), get(usersDescendingSort), get(offices)
@@ -54,20 +56,22 @@ work with to show some of your work changing around this codebase.
 * Adding a set route "usersByName" that will allow the client side to update records and could easily be expanded to add new records.
     * This is currently about 90% complete with calls coming in but each user only has 1 key value pair and assuming this wasn't a problem the update DB code is not updating the DB
     * If we could get call routes working this might be a prime candidate for converting to a function.
-* Pagination breaks when using the POC buttons.
-    * clicking on a page number then clicking next doesn't seem to behave as expected.
-    * there is a maths bug between the client layer and API layer
+* ~~Pagination breaks when using the POC buttons.~~  Fixed: See 'Bug_fixes' branch
+    * ~~clicking on a page number then clicking next doesn't seem to behave as expected.~~
+    * ~~there is a maths bug between the client layer and API layer~~
 
 ### Future
 * Make office names clickable and have the test in that cell replaced by the office address.
     * Clicking on the address should either link to google maps or a link should be included, in parenthesis, as part of the text replacement.
 * Add a dropdown to set number of rows per page.
-
 * Better understand webpack then see if it can be optimized
     * Example: currently the hot server does not sync CSS.
 * Fix table to not extend full width if it isnt needed.
     * Wrap it and pagination in a div so the pagination links never extended beyond the right boarder of the table.
 * Potentially stand up a POC using GraphQL + relay to truly determine which would be the better prod solution for our dataset.
+* Try to optimize users.length route
+    * Hopefully we do not need to retrieve all docs in order to get a row count.
+* Remove debug logging.
 
 ### Setup
 #### Vagrant(automated)
