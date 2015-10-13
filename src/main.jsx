@@ -148,20 +148,20 @@ let App = React.createClass({
     if (target) {
       switch (target.name) {
         case 'next':
-        {
-          this.state.currentPage += 1;
-          break;
-        }
+          {
+            this.state.currentPage += 1;
+            break;
+          }
         case 'previous':
-        {
-          this.state.currentPage -= 1;
-          break;
-        }
+          {
+            this.state.currentPage -= 1;
+            break;
+          }
         default:
-        {
-          this.state.currentPage = target.name;
-          break;
-        }
+          {
+            this.state.currentPage = target.name;
+            break;
+          }
       }
     }
     if (this.state.currentPage < 1 || this.state.currentPage > this.state.pageCount) {
@@ -172,29 +172,33 @@ let App = React.createClass({
     this.getUserCount().then((userCount) => {
       to = to <= userCount ? to : userCount;
     });
+    /*
+    // Testing call(sortedUsers)
     var sortDirection;
-    switch(this.state.sortDirection) {
+    switch (this.state.sortDirection) {
       case 'az':
-      {
-        sortDirection = 'asc';
-        break;
-      }
+        {
+          sortDirection = 'asc';
+          break;
+        }
       case 'za':
-      {
-        sortDirection = 'desc';
-        break;
-      }
-      default: {
-        sortDirection = 'asc';
-        break;
-      }
+        {
+          sortDirection = 'desc';
+          break;
+        }
+      default:
+        {
+          sortDirection = 'asc';
+          break;
+        }
     }
-    /*falcorModel.call('sortedUsers[' + from + '..' + to + ']["name","email","is_enabled","company","office","uid"]', [sortDirection, this.state.sortColumn]).then((data) => {
+    falcorModel.call('sortedUsers[' + from + '..' + to + ']["name","email","is_enabled","company","office","uid"]', [sortDirection, this.state.sortColumn]).then((data) => {
       console.log(data);
       this.setState({
         sorted: toArry(data.json.users), pocTest: 'Testing getSortedUsersEx'
       });
-    });*/
+    });
+    */
     if (this.state.sortDirection === 'az') {
       this.getUsersAscending(from, to);
     } else {
@@ -202,15 +206,14 @@ let App = React.createClass({
     }
   },
   getUsersAscending (from = 0, to = 15) {
-    if(event.target.name === 'Users-Ascending Sort') {
+    if (event.target.name === 'Users-Ascending Sort') {
       from = 0;
       to = 30;
-      this.state.rowsPerPage= 30;
+      this.state.rowsPerPage = 30;
     }
     // POC test for usersAscendingSort
     console.log('loading sorted (Ascending) user info.');
-    console.log("from:" + from + " to:" + to);
-    falcorModel.get(['usersAscendingSort', {from: from, to: to}, ["name","email","is_enabled","company","office","uid"]]).then((data) => {
+    falcorModel.get(['usersAscendingSort', {from: from, to: to}, ['name', 'email', 'is_enabled', 'company', 'office', 'uid']]).then((data) => {
       console.log(data);
       this.setState({
         sorted: toArry(data.json.usersAscendingSort), pocTest: 'Testing usersAscendingSort'
@@ -218,14 +221,14 @@ let App = React.createClass({
     });
   },
   getUsersDescending (from = 0, to = 15) {
-    if(event.target.name === 'Users-Descending Sort') {
+    if (event.target.name === 'Users-Descending Sort') {
       from = 0;
       to = 30;
-      this.state.rowsPerPage= 30;
+      this.state.rowsPerPage = 30;
     }
     // POC test for usersDescendingSort
     console.log('loading sorted(Descending) user info.');
-    falcorModel.get('usersDescendingSort[' + from + '..' + to + ']["name","email","is_enabled","company","office","uid"]').then((data) => {
+    falcorModel.get(['usersDescendingSort', {from: from, to: to}, ['name', 'email', 'is_enabled', 'company', 'office', 'uid']]).then((data) => {
       this.setState({
         sorted: toArry(data.json.usersDescendingSort), sortDirection: 'za', pocTest: 'Testing usersDescendingSort'
       });
