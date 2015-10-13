@@ -67,6 +67,7 @@ work with to show some of your work changing around this codebase.
     * Example: currently the hot server does not sync CSS.
 * Fix table to not extend full width if it isnt needed.
     * Wrap it and pagination in a div so the pagination links never extended beyond the right boarder of the table.
+* Potentially stand up a POC using GraphQL + relay to truly determine which would be the better prod solution for our dataset.
 
 ### Setup
 #### Vagrant(automated)
