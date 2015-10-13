@@ -82,6 +82,11 @@ npm run build-dev                                                               
 npm run start                                                                       # run webpack dev server and thin backend server
 ```
 
+Note: if your server supports apt-get you could download the two shell scripts from the repository:
+* ./prereqs.sh      # Will perform apt-get install -y build-essential libssl-dev git python2.7 and install NVM with 4.1.1 as the default node version
+* ./autodev.sh      # Will do git clone, cd you in to the clone, run npm install, and npm run build-dev
+* npm run start
+
 ### Testing
 Completed features were confirmed working on the following versions of node:
 * 4.1.1
