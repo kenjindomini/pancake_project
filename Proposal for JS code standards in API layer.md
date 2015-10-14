@@ -12,6 +12,19 @@ Function es6Example (arg1, optionalArg = 'Hello') {
 // This follows standard conventions of other modern languages making it
 // instantly obvious to a new developer what is happening.
 ```
-
-* speak to the inconsistency of ES5 and ES6 style anonymous functions
-    * expand by stating that only the ES6 style should ever be used in an ES6 project since 'this' becomes undefined using the ES5 style.
+In working on the client side there were some inconsistencies between the ES5 syntax for an anonymous function versus the ES6 syntax for an anonymous function and the subtle differences may not be immediately obvious to a developer coming onboard that is less familiar with JS. One who is new to JS, but not new to development in general, might see both styles passed as a function argument and could potentially use them interchangably; until one day they use the ES5 style and then try to call 'this' to learn it is undefined with no clear explination as to why.
+#### ES5 Anonymous functions
+```
+// there is a make believe class here...I swear
+hollaback(function (holla) {
+this.hearResponse(holla); //'this' is undefined
+}
+```
+#### ES6 "Arrow Functions"
+```
+// there is a make believe class here...I swear
+hollaback((holla) => {
+this.hearResponse(holla); //'this' correctly referres to the enclosing class.
+}
+```
+We should enforce, through linting if possible, any standard that improves readability thus reducing the time to integrate for a new developer. If supported in the current context ES6 style default parameter values should always be used in favor of the esoteric ES5 and earlier solutions. ES6 Arrow functions should always be used in favor of ES5 anonymous functions for callbacks as a matter of good habit even when there is no 'this' context to maintain.
